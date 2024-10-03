@@ -1,0 +1,139 @@
+['c:/users/bogda/downloads/is_lab2.pl'].
+
+
+
+Основні запити на перевірку:
+Перевірка прямого родо-видового зв'язку (is_a):
+
+prolog
+
+?- is_a(car, vehicle).
+Перевіряє, чи є car видом vehicle.
+Перевірка глибшого родо-видового зв’язку:
+
+prolog
+
+?- is_a(sedan, transport_means).
+Перевіряє, чи є sedan видом transport_means (через кілька проміжних рівнів).
+Перевірка частина-ціле (part_of):
+
+prolog
+
+?- part_of(engine, car).
+Перевіряє, чи є engine частиною car.
+Перевірка глибшого зв'язку частина-ціле:
+
+prolog
+
+?- part_of(piston, car).
+Перевіряє, чи є piston частиною car (через проміжний рівень engine).
+Комбінований запит (part_of через is_a):
+
+prolog
+
+?- part_of(tail_rotor, transport_means).
+Перевіряє, чи є tail_rotor частиною transport_means, що використовує ієрархію is_a.
+Перевірка неіснуючого зв’язку:
+
+prolog
+
+?- part_of(helicopter, car).
+Повинно повернути false, оскільки helicopter не є частиною car.
+Запит усіх видів, які є підвидами певного виду:
+
+prolog
+
+?- is_a(X, vehicle).
+Повертає всі підвиди vehicle, наприклад, land_vehicle, air_vehicle, water_vehicle, car, motorcycle тощо.
+Запит усіх частин конкретного транспортного засобу:
+
+prolog
+
+?- part_of(X, car).
+Повертає всі частини car, такі як engine, wheels, doors, piston, cylinder, tire, rim тощо.
+Складніші запити:
+Знайти всі транспортні засоби, які належать до transport_means:
+
+prolog
+
+?- is_a(X, transport_means).
+Повертає всі види транспортних засобів, включаючи vehicle, land_vehicle, air_vehicle, water_vehicle тощо.
+Пошук усіх частин, які є частиною vehicle:
+
+prolog
+
+?- part_of(X, vehicle).
+Повертає всі частини транспортних засобів, таких як engine, wheels, rotor, airplane_engine, тощо.
+Знайти всі елементи, які є видом або частиною land_vehicle:
+
+prolog
+
+?- is_a(X, land_vehicle); part_of(X, land_vehicle).
+Повертає всі види, такі як car, motorcycle, truck, і всі частини, які безпосередньо належать до land_vehicle.
+Пошук усіх частин, які є підпорядковані helicopter:
+
+prolog
+
+?- part_of(X, helicopter).
+Повертає всі частини helicopter, такі як rotor, tail_rotor.
+Знайти всі транспортні засоби, які є підкатегоріями air_vehicle:
+
+prolog
+
+?- is_a(X, air_vehicle).
+Повертає всі види повітряних транспортних засобів, такі як airplane, helicopter, jet_airplane, propeller_airplane, тощо.
+Знайти всі транспортні засоби, які є підкатегоріями ship:
+
+prolog
+
+?- is_a(X, ship).
+Повертає всі види кораблів, такі як cargo_ship, cruise_ship.
+Знайти всі транспортні засоби, які є частинами airplane:
+
+prolog
+
+?- part_of(X, airplane).
+Повертає всі частини airplane, такі як wings, airplane_engine.
+Запити з використанням змінних:
+Пошук усіх видів, які є підвидами land_vehicle і починаються з певної літери:
+
+prolog
+
+?- is_a(X, land_vehicle), sub_atom(X, 0, _, _, 'm').
+Повертає всі підвиди land_vehicle, які починаються на m, наприклад, motorcycle.
+Пошук усіх частин, які є частиною ship та містять певну підстроку:
+
+prolog
+
+?- part_of(X, ship), sub_atom(X, _, _, _, 'hull').
+Повертає всі частини ship, які містять слово hull.
+Запит на знаходження всіх можливих комбінацій між is_a та part_of:
+
+prolog
+
+?- is_a(X, Y); part_of(X, Y).
+Повертає всі можливі комбінації зв’язків між різними елементами.
+Перевірка логічного заперечення (неіснуючого зв’язку):
+
+prolog
+
+?- \+ is_a(airplane, ship).
+Повертає true, оскільки airplane не є видом ship.
+Перевірка зв’язку для певної частини та виду:
+
+prolog
+
+?- part_of(piston, vehicle).
+Повертає true, якщо Prolog знайде, що piston є частиною vehicle (через транзитивні зв’язки).
+Пошук на основі глибини:
+Перевірка зв’язків із урахуванням глибини:
+prolog
+
+?- is_a(X, Z), write(X), nl, fail.
+Повертає всі можливі зв’язки родо-видових відносин і виводить кожен із них у новому рядку.
+Пошук неіснуючих елементів:
+Перевірка неіснуючого зв’язку між двома елементами:
+prolog
+
+?- part_of(sedan, boat).
+Повинно повернути false, оскільки sedan не є частиною boat.
